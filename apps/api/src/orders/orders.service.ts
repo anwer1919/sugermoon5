@@ -46,7 +46,7 @@ export class OrdersService {
         total,
         notes: data.notes,
         items: { create: orderItems },
-        tracking: { create: { status: 'RECEIVED' } },
+        tracking: { create: { status: 'RECEIVED' as any } },
       },
       include: { items: true, tracking: true },
     });
@@ -79,9 +79,9 @@ export class OrdersService {
   async updateStatus(id: string, status: string) {
     return this.prisma.order.update({
       where: { id },
-      data: {
-        status,
-        tracking: { create: { status } },
+      data: { 
+        status: status as any,
+        tracking: { create: { status: status as any } },
       },
     });
   }
