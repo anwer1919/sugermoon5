@@ -23,7 +23,7 @@ export class UsersController {
   @UseInterceptors(FileInterceptor('avatar'))
   async updateAvatar(
     @Body('userId') userId: string,
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFile() file: any,
   ) {
     // TODO: Upload to S3 and get URL
     const avatarUrl = file?.path || '';
