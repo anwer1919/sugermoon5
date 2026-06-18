@@ -11,7 +11,6 @@ export class OrdersService {
     notes?: string;
     couponCode?: string;
   }) {
-    // Calculate totals
     let subtotal = 0;
     const orderItems = [];
     
@@ -34,9 +33,11 @@ export class OrdersService {
     const shippingFee = 10;
     const tax = subtotal * 0.15;
     const total = subtotal + shippingFee + tax;
+    const orderNumber = `ORD-${Date.now()}`;
 
     return this.prisma.order.create({
       data: {
+        orderNumber,
         userId,
         addressId: data.addressId,
         subtotal,
